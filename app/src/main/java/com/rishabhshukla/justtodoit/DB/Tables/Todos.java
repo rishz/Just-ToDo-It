@@ -69,12 +69,12 @@ public class Todos {
         return todos;
     }
 
-    public static boolean updateTaskAsDone(int taskId, SQLiteDatabase db){
+    public static boolean updateTaskAsDone(int taskId, SQLiteDatabase db, boolean bool){
         if(db.isReadOnly()){
             return false;
         }
         ContentValues todoObj = new ContentValues();
-        todoObj.put(Columns.TASK, "changed Task");
+        todoObj.put(Columns.DONE,bool);
         String whereClause= Columns.ID + " = ?"; // ? is replaced by 3rd parameter of db.delete
 
         db.update(TABLE_NAME,todoObj,whereClause,new String[]{String.valueOf(taskId)});

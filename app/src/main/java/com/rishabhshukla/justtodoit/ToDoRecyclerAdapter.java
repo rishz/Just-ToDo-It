@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
+import com.rishabhshukla.justtodoit.DB.Tables.Todos;
 import com.rishabhshukla.justtodoit.Models.ToDo;
 
 import java.util.ArrayList;
@@ -48,10 +49,10 @@ public class ToDoRecyclerAdapter extends RecyclerView.Adapter<ToDoRecyclerAdapte
                 if(holder.checkBox.isChecked()){
                     holder.tvTask.setPaintFlags(holder.tvTask.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
                 }else{
+
                     holder.tvTask.setPaintFlags(holder.tvTask.getPaintFlags() & (~ Paint.STRIKE_THRU_TEXT_FLAG));
                 }
-
-
+                Todos.updateTaskAsDone(toDoArrayList.get(position).getId(),db,holder.checkBox.isChecked());
             }
         });
 
