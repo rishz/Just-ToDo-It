@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Todos.addTask(et.getText().toString(),dbHelper.getWritableDatabase());
                 refreshTodos();
+                et.setText("");
             }
         });
 

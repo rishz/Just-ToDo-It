@@ -2,6 +2,7 @@ package com.rishabhshukla.justtodoit;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Paint;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,9 +40,23 @@ public class ToDoRecyclerAdapter extends RecyclerView.Adapter<ToDoRecyclerAdapte
     }
 
     @Override
-    public void onBindViewHolder(ToDoViewHolder holder, final int position) {
+    public void onBindViewHolder(final ToDoViewHolder holder, final int position) {
         holder.tvTask.setText(toDoArrayList.get(position).getTaskName());
-//        holder.tvTask.setOnClickListener(new View.OnClickListener() {
+        holder.checkBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(holder.checkBox.isChecked()){
+                    holder.tvTask.setPaintFlags(holder.tvTask.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                }else{
+                    holder.tvTask.setPaintFlags(holder.tvTask.getPaintFlags() & (~ Paint.STRIKE_THRU_TEXT_FLAG));
+                }
+
+
+            }
+        });
+
+
+        //        holder.tvTask.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
 //                Todos.removeTask(toDoArrayList.get(position).getId(),db);
